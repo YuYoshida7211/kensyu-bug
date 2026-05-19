@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>テスト採点システム</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>テスト採点システム</h1>
+
+    <section class="form-section">
+      <table class="score-table">
+        <thead>
+          <tr>
+            <th>科目</th>
+            <th>点数</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="subject-name">国語</td>
+            <td>
+              <input type="text" id="kokugo" class="score-input" placeholder="0〜100" />
+            </td>
+            <td><span class="error-msg" id="kokugo-error"></span></td>
+          </tr>
+          <tr>
+            <td class="subject-name">数学</td>
+            <td>
+              <input type="text" id="sugaku" class="score-input" placeholder="0〜100" />
+            </td>
+            <td><span class="error-msg" id="sugaku-error"></span></td>
+          </tr>
+          <tr>
+            <td class="subject-name">英語</td>
+            <td>
+              <input type="text" id="eigo" class="score-input" placeholder="0〜100" />
+            </td>
+            <td><span class="error-msg" id="eigo-error"></span></td>
+          </tr>
+          <tr>
+            <td class="subject-name">理科</td>
+            <td>
+              <input type="text" id="rika" class="score-input" placeholder="0〜100" />
+            </td>
+            <td><span class="error-msg" id="rika-error"></span></td>
+          </tr>
+          <tr>
+            <td class="subject-name">社会</td>
+            <td>
+              <input type="text" id="shakai" class="score-input" placeholder="0〜100" />
+            </td>
+            <td><span class="error-msg" id="shakai-error"></span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button id="calc-btn" class="calc-button" disabled>計　算</button>
+    </section>
+
+    <section class="result-section" id="result-section" style="display: none;">
+      <h2>採点結果</h2>
+      <div class="result-item">
+        <span class="result-label">合計点</span>
+        <span class="result-value" id="result-total">—</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">平均点</span>
+        <span class="result-value" id="result-avg">—</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">判　定</span>
+        <span class="result-value result-grade" id="result-grade">—</span>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
