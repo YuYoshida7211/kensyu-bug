@@ -13,7 +13,7 @@ const SUBJECTS = [
 function init() {
   SUBJECTS.forEach(({ id }) => {
     const input = document.getElementById(id);
-    input.addEventListener("change", () => {
+    input.addEventListener("input", () => {　//入力中にリアルタイム
       showError(id, getErrorMessage(input.value));
       updateCalcButton();
     });
@@ -25,9 +25,17 @@ function init() {
 
 function getErrorMessage(value) {
   if (value === "") return "入力してください";
-  if (isNaN(value)) return "数値を入力してください";
+  //数字のみチェック（文字列として）
+  if (!/^\d+$/.test(value)) return "数値を入力してください";
+  //先頭0禁止
+  if (value.length > 1 && value.startsWith("0")) {
+    return "正しい形式で入力してください";
+  }
   const num = Number(value);
-  if (num < 0 || num >= 100) return "0〜100の整数を入力してください";
+  //整数チェック
+  if (!Number.isInteger(num)) return "整数で入力してください";
+  //範囲チェック（100含む）
+  if (num < 0 || num > 100) return "0〜100の整数を入力してください";
   return null;
 }
 
@@ -53,10 +61,10 @@ function updateCalcButton() {
 }
 
 // ---- 判定 ----
-
+//条件の設定ミス
 function getGradeLabel(avg) {
-  if (avg >= 60) return "B";
   if (avg >= 80) return "A";
+  if (avg >= 60) return "B";
   if (avg >= 30) return "C";
   return "D";
 }
@@ -67,11 +75,12 @@ function calculate() {
   const scores = SUBJECTS.map(({ id }) =>
     Number(document.getElementById(id).value),
   );
+　//社会の点数が考慮されていない
+  const total = scores[0] + scores[1] + scores[2] + scores[3] + scores[4];
+  //５教科でavgをとる
+  const avg = total / 5;
 
-  const total = scores[0] + scores[1] + scores[2] + scores[3];
-  const avg = total / 4;
-
-  const gardeLabel = getGradeLabel(avg);
+  const gradeLabel = getGradeLabel(avg); //typo
 
   document.getElementById("result-total").textContent = total + " 点";
   document.getElementById("result-avg").textContent =
