@@ -13,7 +13,7 @@ const SUBJECTS = [
 function init() {
   SUBJECTS.forEach(({ id }) => {
     const input = document.getElementById(id);
-    input.addEventListener("change", () => {
+    input.addEventListener("input", () => {
       showError(id, getErrorMessage(input.value));
       updateCalcButton();
     });
@@ -24,10 +24,10 @@ function init() {
 // ---- バリデーション ----
 
 function getErrorMessage(value) {
-  if (value === "") return "入力してください";
+  if (value.trim() === "") return "入力してください";
   if (isNaN(value)) return "数値を入力してください";
   const num = Number(value);
-  if (num < 0 || num >= 100) return "0〜100の整数を入力してください";
+  if (num < 0 || num > 100) return "0〜100の整数を入力してください";
   return null;
 }
 
@@ -55,8 +55,8 @@ function updateCalcButton() {
 // ---- 判定 ----
 
 function getGradeLabel(avg) {
-  if (avg >= 60) return "B";
   if (avg >= 80) return "A";
+  if (avg >= 60) return "B";
   if (avg >= 30) return "C";
   return "D";
 }
@@ -68,10 +68,10 @@ function calculate() {
     Number(document.getElementById(id).value),
   );
 
-  const total = scores[0] + scores[1] + scores[2] + scores[3];
-  const avg = total / 4;
+  const total = scores[0] + scores[1] + scores[2] + scores[3] + scores[4];
+  const avg = total / 5;
 
-  const gardeLabel = getGradeLabel(avg);
+  const gradeLabel = getGradeLabel(avg);
 
   document.getElementById("result-total").textContent = total + " 点";
   document.getElementById("result-avg").textContent =
