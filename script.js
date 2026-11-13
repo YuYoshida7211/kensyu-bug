@@ -16,7 +16,6 @@ const SUBJECTS = [
 function init() {
   SUBJECTS.forEach(({ id }) => {
     const input = document.getElementById(id);
-    // 修正③: change → input（入力中にリアルタイムで検証）
     input.addEventListener("input", () => {
       showError(id, getErrorMessage(input.value));
       updateCalcButton();
@@ -29,11 +28,8 @@ function init() {
 
 function getErrorMessage(value) {
   if (value === "") return "入力してください";
-
   if (!/^-?\d+(\.\d+)?$/.test(value)) return "数値を入力してください";
-
   const num = Number(value);
-
   if (!Number.isInteger(num) || num < MIN_POINT || num > MAX_POINT) {
     return "0〜100の整数を入力してください";
   }
@@ -78,8 +74,8 @@ function calculate() {
     Number(document.getElementById(id).value),
   );
 
-  const total = scores.reduce((sum, s) => sum + s, 0);
-  const avg = total / SUBJECTS.length;
+  const total = scores[0] + scores[1] + scores[2] + scores[3] + scores[4];
+  const avg = total / 5;
 
   const gradeLabel = getGradeLabel(avg);
 
